@@ -83,7 +83,11 @@
               First, initialise submodules:
                 git submodule update --init --recursive
 
-              Then, run './gradlew assembleNoapi' for a headset-free debug build.
+              Then, run:
+                ./gradlew <target>
+
+              To see all available targets, run:
+                ./gradlew tasks --all | grep '^app:assemble'
               EOF
 
               export PROJECT_ROOT="$(git rev-parse --show-toplevel)"
