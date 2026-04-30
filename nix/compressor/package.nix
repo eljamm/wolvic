@@ -5,6 +5,7 @@
   makeWrapper,
   node-gyp,
   pkg-config,
+  etc2comp,
   vips,
 }:
 
@@ -42,6 +43,7 @@ buildNpmPackage (finalAttrs: {
   ];
 
   buildInputs = [
+    etc2comp
     vips # or it will try to download from the Internet
   ];
 

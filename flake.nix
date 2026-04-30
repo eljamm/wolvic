@@ -54,7 +54,7 @@
           packages = with pkgs; [
             androidSdk.androidsdk
             cmake
-            etc2comp
+            fxr-compressor
             gitMinimal
             jdk17
             ninja
