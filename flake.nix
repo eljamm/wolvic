@@ -19,6 +19,12 @@
           inherit system;
           config.android_sdk.accept_license = true;
           config.allowUnfree = true;
+          overlays = [
+            (final: prev: {
+              etc2comp = final.callPackage ./nix/etc2comp/package.nix { };
+              fxr-compressor = final.callPackage ./nix/compressor/package.nix { };
+            })
+          ];
         };
 
         # build-tools + NDK + CMake + platforms
@@ -37,12 +43,18 @@
         androidSdkPath = "${androidSdk.androidsdk}/libexec/android-sdk";
       in
       {
+        packages = {
+          etc2comp = pkgs.etc2comp;
+          fxr-compressor = pkgs.fxr-compressor;
+        };
+
         devShells.default = pkgs.mkShell {
           name = "wolvic-dev";
 
           packages = with pkgs; [
             androidSdk.androidsdk
             cmake
+            etc2comp
             jdk17
             ninja
             python3
