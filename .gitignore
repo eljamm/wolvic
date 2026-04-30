@@ -82,3 +82,9 @@ app/agconnect-services.json
 
 # Token files
 .mls_token
+
+# Kotlin
+.kotlin/
+
+# Nix
+result*
