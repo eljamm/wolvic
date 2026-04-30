@@ -55,6 +55,7 @@
             androidSdk.androidsdk
             cmake
             etc2comp
+            gitMinimal
             jdk17
             ninja
             python3
@@ -85,8 +86,10 @@
               Then, run './gradlew assembleNoapi' for a headset-free debug build.
               EOF
 
+              export PROJECT_ROOT="$(git rev-parse --show-toplevel)"
+
               # use a local gradle home so ~/.gradle isn't polluted
-              export GRADLE_USER_HOME="$PWD/.gradle-home";
+              export GRADLE_USER_HOME="$PROJECT_ROOT/.gradle-home";
               mkdir -p "$GRADLE_USER_HOME"
             '';
         };
