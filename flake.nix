@@ -42,6 +42,19 @@
         packages = {
           etc2comp = pkgs.etc2comp;
           fxr-compressor = pkgs.fxr-compressor;
+
+          emulator = pkgs.androidenv.emulateApp {
+            name = "emulate-wolvic-noapi";
+            platformVersion = "35";
+            abiVersion = "x86_64"; # armeabi-v7a, mips, x86, x86_64
+            systemImageType = "default";
+            # TODO:
+            # - launch app directly
+            # - build apk with Nix?
+            #app = ./app/build/outputs/apk/noapiX64GeckoGeneric/debug/Wolvic-noapi-x64-gecko-generic-debug.apk;
+            #package = "com.igalia.wolvic";
+            #activity = "VRBrowserActivity";
+          };
         };
 
         devShells.default = pkgs.mkShell {
