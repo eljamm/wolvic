@@ -34,10 +34,6 @@
           includeNDK = true;
           ndkVersions = [ "27.0.12077973" ];
           cmakeVersions = [ "3.22.1" ];
-          includeExtras = [
-            "extras;android;m2repository"
-            "extras;google;m2repository"
-          ];
         };
 
         androidSdkPath = "${androidSdk.androidsdk}/libexec/android-sdk";
@@ -53,7 +49,6 @@
 
           packages = with pkgs; [
             androidSdk.androidsdk
-            cmake
             fxr-compressor
             gitMinimal
             jdk17
@@ -71,6 +66,11 @@
           shellHook =
             # bash
             ''
+              export PROJECT_ROOT="$(git rev-parse --show-toplevel)"
+              export GRADLE_USER_HOME="$PROJECT_ROOT/.gradle-home"; # avoid polluting ~/.gradle
+
+              mkdir -p "$GRADLE_USER_HOME"
+
               cat <<-EOF
               ==================
                Wolvic dev shell
@@ -89,12 +89,6 @@
               To see all available targets, run:
                 ./gradlew tasks --all | grep '^app:assemble'
               EOF
-
-              export PROJECT_ROOT="$(git rev-parse --show-toplevel)"
-
-              # use a local gradle home so ~/.gradle isn't polluted
-              export GRADLE_USER_HOME="$PROJECT_ROOT/.gradle-home";
-              mkdir -p "$GRADLE_USER_HOME"
             '';
         };
       }
