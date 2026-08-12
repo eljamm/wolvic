@@ -48,6 +48,7 @@
             platformVersion = "35";
             abiVersion = "x86_64"; # armeabi-v7a, mips, x86, x86_64
             systemImageType = "default";
+            androidEmulatorFlags = "-gpu guest";
             # TODO:
             # - launch app directly
             # - build apk with Nix?
@@ -71,7 +72,7 @@
 
           env = {
             ANDROID_HOME = androidSdkPath;
-            ANDROID_SDK_ROOT = androidSdkPath;
+            # ANDROID_SDK_ROOT = androidSdkPath;
             ANDROID_NDK_ROOT = "${androidSdkPath}/ndk-bundle";
             JAVA_HOME = "${pkgs.jdk17}";
           };
